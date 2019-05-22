@@ -1,0 +1,187 @@
+:root{
+    --pry-col-green: #228b22;
+    --pry-col-red: #FE5F55;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+}
+.navbar .navbar-brand{
+    font-family: 'Eagle Lake', cursive;
+    font-size: 22px;
+    color: var(--pry-col-green);
+    transition: all .4s;
+}
+.navbar .navbar-brand:hover{
+    color: var(--pry-col-red);
+}
+.validation{
+    color: #bf1c1c;
+    background: #e6c7cc;
+    margin-top: .7rem;
+    padding: .5rem;
+    font-size: 15px;
+}
+.mgmt a{
+    border: 1px solid rgba(249, 249, 249, 0.952);
+    color: #fff;
+    background-image: linear-gradient(to bottom right, #0eff14, rgba(55, 122, 0, 0.952));
+    padding: 8px 15px;
+    border-radius: 4px;
+
+}
+.btn-pry{
+    color: #fff;
+    background-image:linear-gradient(to bottom right, #0eff14, rgba(55, 122, 0, 0.952));
+    border-color: rgba(255, 255, 255, 0.952);
+    /* padding: 8px 15px; */
+    transition: all .3s;
+}
+.btn-pry:hover,
+.btn-pry:active{
+    color: #fff;
+    background: rgba(55, 122, 0, 0.952);
+    background: #228b22;
+    border-color: rgba(76, 168, 1, 0.952);
+    box-shadow: 0 0 1.5rem 1.5rem rgba(33, 218, 10, 0.61);
+    outline: none;
+}
+.btn-pry:active{
+    transform: translateY(3px);
+}
+
+.admin_wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: -2.5rem;
+}
+.admin_wrap .sidebar{
+    flex: 1 1 23%;
+    background: #000123;
+    height: 100vh;
+    color: #ababab;
+    padding: 1rem 0;
+}
+
+.admin_wrap .main{
+    flex: 1 1 77%;
+    margin: 1.5rem 3rem;
+}
+.main .breadcrumb{
+    font-size: 18px;
+}
+.breadcrumb a{
+    color: var(--pry-col-red) !important;
+    font-size: 18px;
+    text-decoration: none;
+}
+.topbar{
+    margin-left: 4rem;
+    width: 5rem;
+}
+.topbar a{
+    color: var(--pry-col-green) !important;
+    font-size: 28px;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center
+}
+.topbar .fa{
+    margin-right: 2rem;
+}
+.topbar span{
+    font-size: 18px;
+}
+.admin_wrap .upper_strip{
+    margin: 3rem auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.admin_wrap .upper_strip button{
+    flex: 0 1 20%;
+}
+.admin_wrap button .fa{
+    margin-right: 2rem;
+}                
+.admin_wrap .upper_strip .search_form{
+    flex: 0 1 40%;
+}
+.admin_wrap .main h3{
+    padding: 1.5rem;
+}
+.admin_wrap .modal-body .form-group:not(:last-child){
+    margin-bottom: 5rem;
+}
+.admin_wrap .modal-body .pswd{
+    margin-top: 5rem;
+}
+.supervisor_wrap .inventory{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to bottom right, rgba(13, 146, 91, 0.8), rgba(27, 249, 116, 0.5)), url(/images/inventory2.jpg);
+} 
+.supervisor_wrap .sales{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to bottom right, rgba(141, 146, 146, 0.8), rgba(192, 192, 192, 0.5)), url(/images/inventory5.jpg);
+} 
+.supervisor_wrap .products{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to bottom right, rgba(228, 80, 80, 0.8), rgba(243, 116, 122, 0.5)), url(/images/inventory6.jpg);
+} 
+.supervisor_wrap .top_strip{
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 4rem 1rem; 
+}
+.supervisor_wrap .select_cat{
+    flex: 0 1 40%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.supervisor_wrap .select_cat select{
+    flex: 0 1 60%;
+}
+
+.supervisor_wrap .select_cat button{
+    flex: 0 1 30%;
+}
+
+.supervisor_wrap .select_cat span{
+    flex: 0 1 20%;
+}
+.supervisor_wrap .select_cat .input-group{
+    flex: 0 1 40%;
+}
+.supervisor_wrap .select_cat .stock_table{
+    margin-top: 2rem;
+}
+.supervisor_wrap .select_cat .stock_table thead th{
+    text-align: center;
+}
+.supervisor_wrap .select_cat .stock_table td:last-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.supervisor_wrap .modal-body label{
+    font-size: 14px;
+}
+.supervisor_wrap .stock_table tr .action{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
