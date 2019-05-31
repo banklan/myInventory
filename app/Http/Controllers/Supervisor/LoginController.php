@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Supervisor;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class LoginController extends Controller
 {
@@ -51,5 +53,15 @@ class LoginController extends Controller
     public function showLinkRequestForm()
     {
         return view('supervisor.passwords.email');
+    }
+
+    public function logout(Request $request)
+    {
+        // Session::flush();
+        $this->guard('supervisor')->logout();
+
+        $request->session()->invalidate(true);
+
+        return redirect('/supervisor-login');
     }
 }

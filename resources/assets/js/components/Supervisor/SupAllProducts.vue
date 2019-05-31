@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="stock_table">
-                            <h4>All Products - {{ products.length }}</h4> 
+                            <h4 class="text-center">All Products - {{ products.length }}</h4> 
                             <table class="table table-responsive table-hover table-condensed table-striped table-bordered">
                                 <thead>
                                     <tr>

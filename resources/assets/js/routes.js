@@ -16,11 +16,14 @@ import AdminUserSearchresult from './components/Admin/AdminUserSearchresult.vue'
 import AllProducts from './components/Admin/AdminProducts.vue';
 import AdminProdCateg from './components/Admin/AdminProdCateg.vue';
 import AdminSingleProd from './components/Admin/AdminSingleProd.vue';
+import AdminStock from './components/Admin/Stock.vue';
 import AdminSales from './components/Admin/AdminSales.vue';
+import AdminSingleSale from './components/Admin/AdminSingleSale.vue';
 import SupervisorHome from './components/Supervisor/Home.vue';
 import SupAllStocks from './components/Supervisor/SupAllStocks.vue';
 import SupNewStock from './components/Supervisor/SupNewStock.vue';
 import SupAllSales from './components/Supervisor/SupAllSales.vue';
+import SupSale from './components/Supervisor/SupSingleSale.vue';
 import SupAllProducts from './components/Supervisor/SupAllProducts.vue';
 import SupNewProd from './components/Supervisor/SupNewProd.vue';
 import Testsup from './components/Supervisor/Test.vue';
@@ -29,6 +32,14 @@ import addStock from './components/Supervisor/SupAddStock.vue';
 import SupProdSearch from './components/Supervisor/SupProductSearchResult.vue';
 import SupProdsSearch from './components/Supervisor/SupProductSearchResult2.vue';
 import SupProdShow from './components/Supervisor/SupProdShow.vue';
+import SalesUserHome from './components/Sales/Home.vue';
+import FrontSales from './components/Sales/FrontSales.vue';
+import FrontStocks from './components/Sales/FrontStocks.vue';
+// import FrontProducts from './components/Sales/FrontProducts.vue';
+import FrontLogs from './components/Sales/FrontLogs.vue';
+import FrontSettings from './components/Sales/FrontSettings.vue';
+import frontCheckout from './components/Sales/frontCheckout.vue';
+import salesCart from './components/Sales/frontSalesCart.vue';
 
 
 export default[
@@ -42,6 +53,7 @@ export default[
     {path: '/admin/roles', name:'Roles', component: Roles},
     // {path: '/admin/usersall', name:'UsersAll', component: UsersAll},
     {path: '/admin/inventory', name:'Inventory', component: Inventory},
+    {path: '/admin/stock', name:'AdminStock', component: AdminStock},
     {path: '/admin/settings', name:'Settings', component: Settings},
     {path: '/admin/users/all_admins', name:'AllAdmins', component: AllAdmins},
     {path: '/admin/users/all_supervisors', name:'AllSupervisors', component: AllSupervisors},
@@ -51,10 +63,12 @@ export default[
     {path: '/admin/products/products', name:'AllProducts', component: AllProducts},
     {path: '/admin/products/product/:id', name:'AdminSingleProd', component: AdminSingleProd},
     {path: '/admin/sales', name:'AdminSales', component: AdminSales},
+    {path: '/admin/sales/:id', name:'AdminShowSale', component: AdminSingleSale},
     {path: '/supervisor', name: 'SupervisorHome', component: SupervisorHome, props: true},
     {path: '/supervisor/stocks/all_stocks', name: 'SupAllStocks', component: SupAllStocks},
     {path: '/supervisor/stocks/new_stock', name: 'SupNewStock', component: SupNewStock},
     {path: '/supervisor/all_sales', name: 'SupAllSales', component: SupAllSales},
+    {path: '/supervisor/all_sales/:id', name: 'SupSale', component: SupSale},
     {path: '/supervisor/all_products', name: 'SupAllProducts', component: SupAllProducts},
     {path: '/supervisor/new_product', name: 'SupNewProd', component: SupNewProd},
     {path: '/supervisor/test', name: 'Testsup', component: Testsup},
@@ -63,5 +77,13 @@ export default[
     {path: '/supervisor/stocks/search', name: 'SupProductSearchResult', component: SupProdSearch},
     {path: '/supervisor/product/search', name: 'SupProdsSearch', component: SupProdsSearch},
     {path: '/supervisor/product/:id', name: 'SupProdShow', component: SupProdShow},
+    {path: '/home', name: 'SalesUserHome', component: SalesUserHome},
+    {path: '/front_sales', name: 'FrontSales', component: FrontSales},
+    {path: '/front_stocks', name: 'FrontStocks', component: FrontStocks},
+    // {path: '/front_products', name: 'FrontProducts', component: FrontProducts},
+    {path: '/front_logs', name: 'FrontLogs', component: FrontLogs},
+    {path: '/front_settings', name: 'FrontSettings', component: FrontSettings},
+    {path: '/frontsales_checkout/:id', name: 'frontCheckout', component: frontCheckout},
+    {path: '/sales_cart', name: 'salesCart', component: salesCart},
   
 ]

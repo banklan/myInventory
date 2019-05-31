@@ -44,7 +44,9 @@ Route::get('/admin/user_search_result', 'AdminController@index');
 Route::get('/admin/products/products', 'AdminController@index');
 Route::get('/admin/products/categories', 'AdminController@index');
 Route::get('/admin/products/product/{id}', 'AdminController@index');
-// Route::get('/admin/front_office/{id}', 'AdminController@index');
+Route::get('/admin/stock', 'AdminController@index');
+Route::get('/admin/sales', 'AdminController@index');
+Route::get('/admin/sales/{id}', 'AdminController@index');
 
 //api calls for admin
 Route::get('/getadmins', 'AdminController@getAdmins');
@@ -87,10 +89,20 @@ Route::post('/admin_createcateg', 'AdminTablesController@AdminCreateCateg');
 Route::post('/admin_updatecateg/{id}', 'AdminTablesController@AdminUpdateCateg');
 Route::post('/admin_delcat/{id}', 'AdminTablesController@AdminDelCateg');
 Route::get('/admin_getproducts', 'AdminTablesController@AdminGetProducts');
+Route::get('/admin_getsales_today', 'AdminTablesController@AdminGetSalesToday');
+Route::get('/admin_getsales', 'AdminTablesController@AdminGetSales');
+Route::get('/admin_getsale/{id}', 'AdminTablesController@AdminGetSingleSale');
+Route::post('/admin_findsalesbyuser', 'AdminTablesController@AdminGetSalesByUser');
+Route::post('/admin_findsalesbyprod', 'AdminTablesController@AdminGetSalesByProd');
+Route::get('/admin_getstock_status', 'AdminTablesController@AdminGetStockStatus');
 Route::post('/admin_createproduct', 'AdminTablesController@AdminCreateProduct');
 Route::get('/admin_viewproduct/{id}', 'AdminTablesController@AdminGetProduct');
 Route::post('/admin_delprod/{id}', 'AdminTablesController@AdminDelProduct');
 Route::post('/admin_updateproduct/{id}', 'AdminTablesController@AdminUpdateProduct');
+Route::get('/admin_getstock', 'AdminTablesController@AdminGetStock');
+Route::get('/admin_getbatches', 'AdminTablesController@AdminGetBatches');
+Route::get('/admin_getusers', 'AdminTablesController@AdminGetUsers');
+Route::post('/admin_findbatch', 'AdminTablesController@AdminFindSalesByBatch');
 Route::get('/getUser', 'AdminTablesController@findAdmin');
 Route::get('/get_adminprofile', 'AdminTablesController@getProfile');
 Route::post('/admin_updateprofile', 'AdminTablesController@adminUpdateProfile');
@@ -99,6 +111,7 @@ Route::post('/admin_changepswd', 'AdminTablesController@adminChangePswd');
 
 
 //supervisor routes
+Route::post('/supervisor/logout', 'Supervisor\LoginController@logout')->name('supervisor.logout');
 Route::get('/supervisor', 'SupervisorController@index')->name('supervisor.home');
 Route::get('/supervisor-login', 'Supervisor\LoginController@showLoginForm')->name('supervisor.login');
 Route::post('/supervisor-login', 'Supervisor\LoginController@login');
@@ -114,6 +127,8 @@ Route::get('/supervisor/all_products', 'SupervisorController@index');
 Route::get('/supervisor/product/search', 'SupervisorController@index');
 Route::get('/supervisor/product/{id}', 'SupervisorController@index');
 Route::get('/supervisor/settings', 'SupervisorController@index');
+Route::get('/supervisor/all_sales', 'SupervisorController@index');
+
 
 // supervisors api call
 Route::get('/getcategs', 'SupervisorController@getCategs');
@@ -128,3 +143,36 @@ Route::get('/sup_getprofile', 'SupervisorController@getSupervisorProfile');
 Route::post('/sup_changepswd', 'SupervisorController@SupChangePswd');
 Route::post('/sup_checkpswd', 'SupervisorController@SupCheckPswd');
 Route::post('/sup_updateprofile', 'SupervisorController@updateProfile');
+Route::get('/sup_getsales', 'SupervisorController@supGetSales');
+Route::get('/sup_getsale/{id}', 'SupervisorController@supGetSingleSale');
+Route::get('/sup_getbatches', 'SupervisorController@supGetBatches');
+Route::get('/sup_getusers', 'SupervisorController@supGetUsers');
+Route::get('/sup_getsales_today', 'SupervisorController@supGetSalesToday');
+Route::post('/sup_findbatch', 'SupervisorController@supFindBatch');
+Route::post('/sup_findsalesbyuser', 'SupervisorController@supGetSalesByUser');
+Route::post('/sup_findsalesbyprod', 'SupervisorController@supGetSalesByProd');
+
+//front sales user routes
+Route::get('/home', 'HomeController@index')->name('sales.home');
+Route::get('/front_sales', 'HomeController@index');
+Route::get('/front_stocks', 'HomeController@index');
+Route::get('/front_products', 'HomeController@index');
+Route::get('/front_settings', 'HomeController@index');
+Route::get('/front_logs', 'HomeController@index');
+Route::get('/frontsales_checkout/{id}', 'HomeController@index');
+Route::get('/sales_cart', 'HomeController@index');
+
+//front sales api calls
+Route::get('/get_batchstatus', 'HomeController@getBatchStatus');
+Route::post('/user_openbatch', 'HomeController@openBatch');
+Route::post('/sales_fetchitem', 'UserSalesController@fetchItem');
+Route::get('/get_product/{id}', 'UserSalesController@getProduct');
+Route::post('/sales_checkout', 'UserSalesController@checkoutss');
+Route::get('/get_userslog', 'UserSalesController@getLog');
+Route::get('/get_usersbatches', 'UserSalesController@getBatches');
+Route::post('/get_batchsales', 'UserSalesController@getBatchSales');
+Route::get('/get_allstocks', 'UserSalesController@getAllStocks');
+Route::get('/getuserprofile', 'UserSalesController@getUserProfile');
+Route::post('/user_changepswd', 'UserSalesController@changePswd');
+Route::post('/user_confirmpswd', 'UserSalesController@UserCheckPswd');
+Route::post('/user_updateprofile', 'UserSalesController@UserUpdateprofile');

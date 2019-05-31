@@ -15,6 +15,7 @@ import VueToasted from 'vue-toasted';
 import VueModal from 'vue-js-modal';
 import Routes from './routes';
 import { store } from './store';
+import './filters';
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
@@ -38,11 +39,12 @@ const router = new VueRouter({
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('admin-sidebar', require('./components/AdminSidebar.vue'));
-Vue.component('main-wrap', require('./components/MainWrap.vue'));
+Vue.component('main-wrap', require('./components/Admin/MainWrap.vue'));
 // Vue.component('navi', require('./components/nav2.vue'));
 Vue.component('admin-search-form', require('./components/AdminSearchForm.vue'));
 Vue.component('supervisor-nav', require('./components/Supervisor/SupervisorNav.vue'));
 Vue.component('add-stock-modal', require('./components/Supervisor/AddStockModal.vue'));
+Vue.component('sales-nav', require('./components/Sales/SalesNav.vue'));
 
 const app = new Vue({
     el: '#app',

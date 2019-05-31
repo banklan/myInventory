@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="stock_table">
-                            <h4>All Stock</h4> 
+                            <h4 class="text-center">All Stock {{ products.length }}</h4> 
                             <table class="table table-responsive table-hover table-condensed table-striped table-bordered">
                                 <thead>
                                     <tr>
@@ -143,6 +143,12 @@
 }
 .stock_table{
     margin-top: 2rem;
+    background: #fff;
+    padding: 2.5rem;
+
+    h4{
+        padding: .5rem 1.5rem 1.5rem 1.5rem;
+    }
     thead th{
         text-align: center;
     }

@@ -11,6 +11,8 @@ class Stock extends Model
         'mfg', 'exp'
     ];
 
+    // protected $with = ['product'];
+
     public function product()
     {
         return $this->belongsTo('App\Product');

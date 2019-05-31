@@ -6,14 +6,27 @@ Vue.use(Vuex, axios);
 
 export const store = new Vuex.Store({
     state: {
-        newStock:{}
+        cart:[]
     },
     getters:{
-
+        getCart(state){
+            return state.cart
+        },
     },
     mutations:{
-        addStock(state, prod){
-            state.newStock = prod
+        add_to_cart(state, prod){
+            state.cart.push(prod)
+        },
+        remove_item(state, prod){
+          let i =  state.cart.map(item => item.id).indexOf(prod)
+          state.cart.splice(i, 1)
+          localStorage.setItem('cart', JSON.stringify(store.cart))
+        //    var cart = state.cart.filter((item)=>
+        //        item !== prod
+        //     )
+            // state.cart = cart
+            // state.cart.splice(index, 1)
+            console.log(state.cart)
         }
     },
     actions:{

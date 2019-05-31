@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Sale;
 use App\Stock;
 use App\Product;
+use Carbon\Carbon;
 use App\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,37 +42,37 @@ class SupervisorController extends Controller
         return response()->json($products, 200);
     }
 
-    public function supAddNewStock(Request $request)
-    {
-        $this->validate($request, [
-            'stock.product' => 'required',
-            'stock.category' => 'required',
-            'stock.size' => 'required',
-            'stock.packsRcvd' => 'required|numeric|between:1,1000',
-            'stock.unitsPp' => 'required|numeric|between:1,1000',
-            'stock.colour' => 'max:20',
-            'stock.pricePU' => 'required|numeric|between:1,100000',
-            'stock.totalUnits' => 'required|numeric|between:1,100000',
-            'stock.totalCost' => 'required|numeric|between:1,10000000',
-            'stock.sn' => 'required',
-        ]);
+    // public function supAddNewStock(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         'stock.product' => 'required',
+    //         'stock.category' => 'required',
+    //         'stock.size' => 'required',
+    //         'stock.packsRcvd' => 'required|numeric|between:1,1000',
+    //         'stock.unitsPp' => 'required|numeric|between:1,1000',
+    //         'stock.colour' => 'max:20',
+    //         'stock.pricePU' => 'required|numeric|between:1,100000',
+    //         'stock.totalUnits' => 'required|numeric|between:1,100000',
+    //         'stock.totalCost' => 'required|numeric|between:1,10000000',
+    //         'stock.sn' => 'required',
+    //     ]);
 
-        $stock = new Stock;
-        $stock->product_id = $request->stock['product'];
-        $stock->size = $request->stock['size'];
-        $stock->pks_received = $request->stock['packsRcvd'];
-        $stock->units_perpack = $request->stock['unitsPp'];
-        $stock->colour = $request->stock['colour'];
-        $stock->price_perunit = $request->stock['pricePU'];
-        $stock->total_units = $request->stock['totalUnits'];
-        $stock->total_cost = $request->stock['totalCost'];
-        $stock->sn = $request->stock['sn'];
-        $stock->mfg = $request->stock['mfg'];
-        $stock->exp = $request->stock['exp'];
-        $stock->save();
+    //     $stock = new Stock;
+    //     $stock->product_id = $request->stock['product'];
+    //     $stock->size = $request->stock['size'];
+    //     $stock->pks_received = $request->stock['packsRcvd'];
+    //     $stock->units_perpack = $request->stock['unitsPp'];
+    //     $stock->colour = $request->stock['colour'];
+    //     $stock->price_perunit = $request->stock['pricePU'];
+    //     $stock->total_units = $request->stock['totalUnits'];
+    //     $stock->total_cost = $request->stock['totalCost'];
+    //     $stock->sn = $request->stock['sn'];
+    //     $stock->mfg = $request->stock['mfg'];
+    //     $stock->exp = $request->stock['exp'];
+    //     $stock->save();
 
-        return response()->json($stock, 200);
-    }
+    //     return response()->json($stock, 200);
+    // }
 
     public function supGetProducts()
     {
@@ -102,6 +104,15 @@ class SupervisorController extends Controller
         $stock->mfg = $request->stock['mfg'];
         $stock->exp = $request->stock['expiry'];
         $stock->save();
+
+        //get product and increase the instock value
+        $product = Product::findOrFail($id);
+        $instock = $product->total_in_stock;
+        $total = intval($stock->total_units) + intval($instock);
+
+        $product->update([
+            $product->total_in_stock = $total
+        ]);
 
         return response()->json($stock, 200);
     }
@@ -178,4 +189,66 @@ class SupervisorController extends Controller
 
         return response()->json($sup, 200);
     }
+
+    public function supGetSales()
+    {
+        $sales = Sale::latest()->get();
+
+        return response()->json($sales->load('user'), 200);
+    }
+
+    public function supGetBatches()
+    {
+        $batches = Sale::selectRaw('product_id, batch')->groupBy('batch')->latest()->get();
+
+        return response()->json($batches, 200);
+    }
+
+    public function supGetUsers()
+    {
+        $users = Sale::selectRaw('user_id')->groupBy('user_id')->distinct()->get();
+
+        return response()->json($users, 200);
+    }
+
+    public function supGetSalesToday()
+    {
+        $batch = Carbon::now()->toDateString();
+        $sales = Sale::where('batch', $batch)->get();
+
+        return response()->json($sales, 200);
+    }
+
+    public function supFindBatch(Request $request)
+    {
+        $batch = $request->batch;
+        $sales = Sale::where('batch', $batch)->get();
+
+        return response()->json($sales, 200);
+    }
+
+    public function supGetSalesByUser(Request $request)
+    {
+        $user = $request->user;
+        $sales = Sale::where('user_id', $user)->get();
+
+        return response()->json($sales, 200);
+    }
+
+    public function supGetSalesByProd(Request $request)
+    {
+        $prod = $request->product;
+        $sales = Sale::where('product_id', 'like', "%".$prod."%")->orWhereHas('product', function($q) use($prod){
+            $q->where('name', 'like', "%".$prod."%");
+            })->get();
+        
+        return response()->json($sales, 200);
+    }
+
+    public function supGetSingleSale($id)
+    {
+        $sale = Sale::findOrFail($id);
+
+        return response()->json($sale, 200);
+    } 
 }

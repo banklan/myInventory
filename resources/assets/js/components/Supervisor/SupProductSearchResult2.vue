@@ -26,7 +26,7 @@
                                         <td>{{ prod.name }}</td>
                                         <td>{{ prod.category.name }}</td>
                                         <td>{{ prod.size }}</td>
-                                        <td class="action"><button class="btn btn-primary btn-sm" type="button">View <i class="fa fa-eye"></i></i></button>
+                                        <td class="action"><button class="btn btn-primary btn-sm" type="button">View <i class="fa fa-eye"></i></button>
                                             <button class="btn btn-default btn-sm" type="button">Edit <i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm" type="button">Delete <i class="fa fa-trash"></i></button>
                                         </td>

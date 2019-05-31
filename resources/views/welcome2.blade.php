@@ -9,10 +9,18 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Arimo|Eagle+Lake|Lato|Merienda+One|Open+Sans&display=swap" rel="stylesheet">
+
+        <!-- Styles -->
         <style>
+            html, body {
+                background-color: #fff;
+                color: #636b6f;
+                font-family: 'Raleway', sans-serif;
+                font-weight: 100;
+                height: 100vh;
+                margin: 0;
+            }
+
             .full-height {
                 height: 100vh;
             }
@@ -26,45 +34,29 @@
             .position-ref {
                 position: relative;
             }
-            .top-left{
-                position: absolute;
-                left: 45px;
-                top: 15px;
-            }
-            .top-left a{
-                color: #ffff13;
-                font-family: 'Sacramento', cursive;
-                font-weight: 100;
-                text-decoration: none;
-                font-size: 28px;
-            }
+
             .top-right {
                 position: absolute;
                 right: 10px;
-                top: 25px;
+                top: 18px;
             }
+
             .content {
                 text-align: center;
-                background-image: linear-gradient(to right bottom, rgba(15, 35, 42, .2), rgba(255, 53, 53, 0.3));
-                padding: 15px;
-                border-radius: 6px;
             }
-            .content h3{
-                color: var(--pry-col-yellow);
-                font-size: 48px;
-                font-weight: 100;
-                font-family: 'Eagle Lake', sans-serif;
+
+            .title {
+                font-size: 84px;
             }
 
             .links > a {
-                color: #ffff13;
+                color: #636b6f;
                 padding: 0 25px;
-                font-size: 14px;
-                font-weight: 400;
+                font-size: 12px;
+                font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
-                font-family: 'Lato', sans-serif;
             }
 
             .m-b-md {
@@ -75,9 +67,6 @@
     <body>
         <div class="flex-center position-ref full-height welcome_wrap">
             @if (Route::has('login'))
-                <div class="top-left">
-                    <a href="{{ url('/') }}">myInventory</h3>
-                </div>
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
@@ -90,7 +79,7 @@
             @endif
 
             <div class="content">
-                <h3>Inventory/POS manager</h3>
+                
             </div>
         </div>
     </body>

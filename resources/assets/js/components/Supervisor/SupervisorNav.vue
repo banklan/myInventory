@@ -68,6 +68,9 @@ export default {
 
 <style lang="scss">
     .nav_wrap{
+        border-bottom: 1px solid lightgray;
+        margin-bottom: 2rem;
+
         #app-navbar-collapse{
             margin: 1rem 6rem;
 

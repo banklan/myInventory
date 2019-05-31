@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Sale;
 use App\Product;
+use Carbon\Carbon;
 use App\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\DailyBatch;
 
 class AdminTablesController extends Controller
 {
@@ -73,6 +76,7 @@ class AdminTablesController extends Controller
         $product->cost_price = $request->cost;
         $product->selling_price = $request->selling;
         $product->size = $request->size;
+        $product->total_in_stock = 0;
         $product->save();
 
         return response()->json($product->load('category'), 200);
@@ -175,5 +179,82 @@ class AdminTablesController extends Controller
             ]);
             return response()->json(true, 200);
         }
+    }
+
+    public function AdminGetSalesToday()
+    {
+        $batch = Carbon::now()->toDateString();
+        $sales = Sale::where('batch', $batch)->get();
+
+        return response()->json($sales, 200);
+    }
+
+    public function AdminGetStockStatus()
+    {
+        $products = Product::all();
+
+        return response()->json($products, 200);
+    }
+
+    public function AdminGetStock()
+    {
+        $products = Product::orderBy('name', 'Desc')->get();
+
+        return response()->json($products, 200);
+    }
+
+    public function AdminGetSales()
+    {
+        $sales = Sale::latest()->get();
+
+        return response()->json($sales->load('user'), 200);
+    }
+
+    public function AdminGetBatches()
+    {
+        // $batches = DailyBatch::latest()->get();
+        $batches = Sale::selectRaw('product_id, batch')->groupBy('batch')->latest()->get();
+
+        return response()->json($batches, 200);
+    }
+
+    public function AdminGetUsers()
+    {
+        $users = Sale::selectRaw('user_id')->groupBy('user_id')->distinct()->get();
+
+        return response()->json($users, 200);
+    }
+
+    public function AdminFindSalesByBatch(Request $request)
+    {
+        $batch = $request->batch;
+        $sales = Sale::where('batch', $batch)->get();
+
+        return response()->json($sales, 200);
+    }
+
+    public function AdminGetSalesByUser(Request $request)
+    {
+        $user = $request->user;
+        $sales = Sale::where('user_id', $user)->get();
+
+        return response()->json($sales, 200);
+    }
+
+    public function AdminGetSalesByProd(Request $request)
+    {
+        $prod = $request->product;
+        $sales = Sale::where('product_id', 'like', "%".$prod."%")->orWhereHas('product', function($q) use($prod){
+            $q->where('name', 'like', "%".$prod."%");
+            })->get();
+        
+        return response()->json($sales, 200);
+    }
+
+    public function AdminGetSingleSale($id)
+    {
+        $sale = Sale::findOrFail($id);
+
+        return response()->json($sale, 200);
     }
 }

@@ -1,11 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.app_sup')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Supervisor Login</div>
+                <div class="panel-heading">
+                    <h4 class="text-center">
+                        Supervisor Login
+                    </h4>
+                </div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('supervisor.login') }}">
